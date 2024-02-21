@@ -19,11 +19,11 @@
 
 
                             <div class="col-12">
-                                <label for="empno" class="col-form-label text-md-end">{{ __('User ID')
+                                <label for="email" class="col-form-label text-md-end">{{ __('User ID')
                                     }}</label>
-                                <input id="empno" type="text" class="form-control @error('empno') is-invalid @enderror"
-                                    name="email" value="{{ old('empno') }}" placeholder="Type here" required
-                                    autocomplete="empno" autofocus>
+                                <input id="email" type="text" class="form-control @error('email') is-invalid @enderror"
+                                    name="email" value="{{ old('email') }}" placeholder="Type here" required
+                                    autocomplete="email" autofocus>
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">

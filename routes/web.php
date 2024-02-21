@@ -17,11 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes([
+    'register' => false
+]);
 
 Route::get('/otp', [\App\Http\Controllers\Auth\RegisterController::class, 'otp'])->name('otp');
 
-Route::get('/home', [App\Http\Controllers\PlacementController::class, 'mapping_placement'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::group(['prefix' => 'member', 'as' =>'member.', 'middleware' =>['auth', 'checkRole:admin,member']], function (){
     Route::get('/', [\App\Http\Controllers\UserController::class, 'index'])->name('index');
 });

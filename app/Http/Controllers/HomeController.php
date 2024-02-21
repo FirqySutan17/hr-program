@@ -26,39 +26,39 @@ class HomeController extends Controller
        
         // // Create connection to Oracle
         
-        $username   = "suja";
-        $password   = "suja";
-        $database   = "//10.137.26.67:1521/BRS";
-        $conn   = oci_connect($username, $password, $database);
+        // $username   = "suja";
+        // $password   = "suja";
+        // $database   = "//10.137.26.67:1521/BRS";
+        // $conn   = oci_connect($username, $password, $database);
+        // // if (!$conn) {
+        // //    $m = oci_error();
+        // //    echo $m['message'], "\n";
+        // //    exit;
+        // // }
+        // // else {
+        // //    print "Connected to Oracle!";
+        // // }
+        // // // Close the Oracle connection
+        // // oci_close($conn);
+        // // $conn = oci_connect('CJCMS', 'admin99', '10.137.62.6:1521/RPA');
         // if (!$conn) {
-        //    $m = oci_error();
-        //    echo $m['message'], "\n";
-        //    exit;
-        // }
-        // else {
-        //    print "Connected to Oracle!";
-        // }
-        // // Close the Oracle connection
-        // oci_close($conn);
-        // $conn = oci_connect('CJCMS', 'admin99', '10.137.62.6:1521/RPA');
-        if (!$conn) {
-            $e = oci_error();
-            trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
-        } 
+        //     $e = oci_error();
+        //     trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+        // } 
 
-        $stid = oci_parse($conn, 'SELECT * FROM SH_PD_ABF_RESULT WHERE EPCNO IS NOT NULL');
-        oci_execute($stid);
+        // $stid = oci_parse($conn, 'SELECT * FROM SH_PD_ABF_RESULT WHERE EPCNO IS NOT NULL');
+        // oci_execute($stid);
 
-        echo "<table border='1'>\n";
-        while ($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) {
-            echo "<tr>\n";
-            foreach ($row as $item) {
-                echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
-            }
-            echo "</tr>\n";
-        }
-        echo "</table>\n";
+        // echo "<table border='1'>\n";
+        // while ($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) {
+        //     echo "<tr>\n";
+        //     foreach ($row as $item) {
+        //         echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+        //     }
+        //     echo "</tr>\n";
+        // }
+        // echo "</table>\n";
         
-        // return view('home');
+        return view('home');
     }
 }

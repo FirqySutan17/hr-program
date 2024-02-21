@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use DB;
 
 class LoginController extends Controller
 {
+    protected $maxAttempts = 3;
+    protected $decayMinutes = 10;
     /*
     |--------------------------------------------------------------------------
     | Login Controller
