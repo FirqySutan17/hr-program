@@ -46,22 +46,49 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    protected function sendFailedLoginResponse(Request $request)
+    public function login(Request $request)
     {
-        throw ValidationException::withMessages([
-            'username' => [trans('auth.failed')],
+        
+        // $this->validateLogin($request);
+        $request->validate([
+            'employee_id' => 'required|string',
+            'password' => 'required|string',
         ]);
-    }
-    /**
-     * Get the login username to be used by the controller.
-     *
-     * @return string
-     */
-    public function username()
-    {
-        $login = request()->input('username');
-        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-        request()->merge([$field => $login]);
-        return $field;
+        
+        if (auth()->attempt(['employee_id' => $request->employee_id, 'password' => $request->password])) {
+            Alert::toast('Login Successfull', 'success');
+            // if (auth()->user()->roles()->first()->name == 'Cashier') {
+            //     return redirect()->intended('shift');
+            //     // return redirect()->intended('transaction/create');
+            // }
+            return redirect()->intended('home');
+        } else {
+
+            if ($this->hasTooManyLoginAttempts($request)) {
+
+                $key = $this->throttleKey($request);
+                $rateLimiter = $this->limiter();
+
+
+                $limit = [3 => 10, 5 => 30];
+                $attempts = $rateLimiter->attempts($key);  // return how attapts already yet
+
+                if ($attempts >= 5) {
+                    $rateLimiter->clear($key);;
+                }
+
+                if (array_key_exists($attempts, $limit)) {
+                    $this->decayMinutes = $limit[$attempts];
+                }
+
+                $this->incrementLoginAttempts($request);
+
+                $this->fireLockoutEvent($request);
+                return $this->sendLockoutResponse($request);
+            }
+
+            $this->incrementLoginAttempts($request);
+            return $this->sendFailedLoginResponse($request);
+        }
     }
 }

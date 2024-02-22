@@ -17,8 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/login', function () {
+    return redirect(route('login'));
+  });
+
 Auth::routes([
     'register' => false
 ]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/pre-posttest', [App\Http\Controllers\PrepostTestController::class, 'index'])->name('prepost.index');

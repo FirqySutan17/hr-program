@@ -19,12 +19,13 @@
 
 
                             <div class="col-12">
-                                <label for="email" class="col-form-label text-md-end">{{ __('User ID')
+                                <label for="employee_id" class="col-form-label text-md-end">{{ __('User ID')
                                     }}</label>
-                                <input id="username" type="text"
-                                    class="form-control @error('username') is-invalid @enderror" name="username"
-                                    value="{{ old('username') }}" required autofocus>
-                                @error('username')
+                                <input name="employee_id"
+                                    class="form-control @error('employee_id') is-invalid @enderror"
+                                    id="input_login_employee_id" type="text" placeholder="Employee ID"
+                                    value="{{ old('employee_id') }}">
+                                @error('employee_id')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

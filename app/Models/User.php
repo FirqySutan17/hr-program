@@ -19,7 +19,7 @@ class User extends Authenticatable implements \Illuminate\Contracts\Auth\Authent
      */
     protected $fillable = [
         'name',
-        'username',
+        'employee_id',
         'email',
         'password',
     ];

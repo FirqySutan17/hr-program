@@ -7,12 +7,13 @@
     <meta name="description" content="CJ Feed and Care">
     <meta name="keywords" content="CJ Feed and Care">
     <meta name="author" content="Cheiljedang Indonesia ">
-    <link rel="icon" href="{{ asset('img/cj-logo.png')}}" type="image/x-icon">
+    <link rel="icon" type="image/png" href="{{ asset('icon/iconcj.ico')}}" sizes="16x16">
+    <link rel="icon" type="image/png" href="{{ asset('icon/iconcj.ico')}}" sizes="32x32">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>HR Program - CJ Feed & Care Indonesia</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -124,7 +125,7 @@
                     </div> --}}
                     <div class="dropdown-profile">
                         <img onclick="ddProfile()" class="dd-profile img-fluid avatar-style"
-                            src="{{ asset('icon/avatar.png') }}" alt="">
+                            src="{{ asset('icon/avatar.png') }}" alt="" style="max-width: 40px;">
                         <div id="myddProfile" class="dropdown-content-profile">
                             {{-- <a href="{{ route('setting.index') }}">Profile</a> --}}
                             <button type="button">

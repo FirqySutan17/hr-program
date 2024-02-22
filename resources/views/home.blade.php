@@ -4,123 +4,197 @@
 Dashboard
 @endsection
 
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+
+    @font-face {
+        font-family: cjfont;
+        src: url('{{ asset("font/cjfont.ttf")}}');
+    }
+
+    .nav-dash,
+    .slider {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        background-color: #ffffff;
+        text-align: center;
+        padding: 0 2em;
+        height: 80vh;
+    }
+
+    .nav-dash h1,
+    .slider h1 {
+        font-family: cjfont;
+        font-size: 2vw;
+        margin: 0;
+        padding-bottom: 0.5rem;
+        letter-spacing: 0.5rem;
+        color: #04302c;
+        transition: all 0.3s ease;
+        z-index: 3;
+        margin-bottom: 20px
+    }
+
+    h1:hover {
+        transform: translate3d(0, -10px, 22px);
+        color: #ee141e;
+    }
+
+    .nav-dash h2,
+    .slider h2 {
+        font-size: 2vw;
+        letter-spacing: 0.5rem;
+        font-family: "ROBOTO", sans-serif;
+        font-weight: 300;
+        color: #ff9600;
+        z-index: 4;
+    }
+
+    .nav-dash a {
+        text-decoration: none;
+        z-index: 10;
+        background: #000;
+        border: 1px solid transparent;
+        color: #fff;
+        font-size: 18px;
+        padding: 10px 70px;
+        border-radius: 10px;
+        font-family: cjfont;
+        transition: all 0.5s ease;
+    }
+
+    .nav-dash a:hover {
+        background: transparent;
+        border: 1px solid #000;
+        color: #000;
+    }
+
+    .nav-dash-container {
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 75px;
+        box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+        background: #1e1f26;
+        z-index: 10;
+        transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .nav-dash-container--top-first {
+        position: fixed;
+        top: 75px;
+        transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .nav-dash-container--top-second {
+        position: fixed;
+        top: 0;
+    }
+
+    .nav-dash-container--top-second {
+        position: fixed;
+        top: 0;
+    }
+
+    .nav-dash-tab {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+        color: #03dac6;
+        letter-spacing: 0.1rem;
+        transition: all 0.5s ease;
+        font-size: 2vw;
+    }
+
+    .nav-dash-tab:hover {
+        color: #1e1f26;
+        background: #03dac6;
+        transition: all 0.5s ease;
+    }
+
+    .nav-dash-tab-slider {
+        position: absolute;
+        bottom: 0;
+        width: 0;
+        height: 5px;
+        background: #03dac6;
+        transition: left 0.3s ease;
+    }
+
+    .background {
+        position: absolute;
+        height: 100vh;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: auto;
+    }
+
+    @media (max-width: 800px) {
+
+        .nav-dash h1,
+        .slider h1 {
+            font-size: 20px;
+            margin-top: 30px;
+            line-height: 35px
+        }
+
+        .nav-dash h2,
+        .slider h2 {
+            font-size: 3vw;
+        }
+
+        .nav-dash-tab {
+            font-size: 3vw;
+        }
+    }
+
+    @media screen only (min-width: 360px) {
+
+
+        .nav-dash h2,
+        .slider h2 {
+            font-size: 2vw;
+            letter-spacing: 0.2vw;
+        }
+
+        .nav-dash-tab {
+            font-size: 1.2vw;
+        }
+    }
+
+    .background {
+        position: absolute;
+        height: 100vh;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 0;
+    }
+</style>
+
 @section('content')
 <div class="main-content">
-    <div class="tab-settings">
-        <div class="tab-left">
-            {{-- <button class="filter-btn menu-style">
-                Filter
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 6H21" stroke="black" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                    <path d="M7 12L17 12" stroke="black" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                    <path d="M11 18L13 18" stroke="black" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                </svg>
-
-            </button> --}}
-        </div>
-        <div class="tab-right">
-
-            <form role="search" id="form">
-                <input type="search" id="query" name="q" placeholder="Search history.."
-                    aria-label="Search through site content">
-                <button class="search-btn">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17 17L21 21" stroke="black" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                        <path
-                            d="M3 11C3 15.4183 6.58172 19 11 19C13.213 19 15.2161 18.1015 16.6644 16.6493C18.1077 15.2022 19 13.2053 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11Z"
-                            stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-
-                </button>
-            </form>
-        </div>
-
-    </div>
-
-    <div class="table-content table-responsive">
-        <table class="table table-width">
-            <thead>
-                <tr>
-                    <th scope="col">Subscriber</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone number</th>
-                    <th scope="col">Subscribe up to</th>
-                    <th scope="col">Last package</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row" class="name-cus">
-                        <img class="img-fluid avatar-style custo-img" src="{{ asset('icon/avatar.png') }}" alt="">
-                        &nbsp;
-                        Anita Sari
-                    </th>
-                    <td>anita@gmail.com</td>
-                    <td>082284789876</td>
-                    <td>Mar 20, 2023</td>
-                    <td>Business</td>
-                    <td>
-                        <div class="dropdown-dot">
-                            <i onclick="dotDetail()" class="fa-solid fa-ellipsis dropbtn-dot "></i>
-                            <div id="myDropdownDot" class="dropdown-content-dot">
-                                <button id="detailSubs" data-bs-toggle="modal" data-bs-target="#subDetail">
-                                    Detail subscriber
-                                </button>
-                                <button style="color: #DB1020" id="susSubs" data-bs-toggle="modal"
-                                    data-bs-target="#subSus">
-                                    Suspend
-                                </button>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-
-                <tr>
-                    <th scope="row" class="name-cus">
-                        <img class="img-fluid avatar-style custo-img" src="{{ asset('icon/avatar.png') }}" alt="">
-                        &nbsp;
-                        Bayu Pramudita
-                    </th>
-                    <td>bayu@gmail.com</td>
-                    <td>082284789876</td>
-                    <td>Mar 20, 2023</td>
-                    <td>Professional</td>
-                    <td>
-                        <div class="dropdown-dot">
-                            <i onclick="dotDetail()" class="fa-solid fa-ellipsis dropbtn-dot "></i>
-                            <div id="myDropdownDot" class="dropdown-content-dot">
-
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-
-                <tr>
-                    <th scope="row" class="name-cus">
-                        <img class="img-fluid avatar-style custo-img" src="{{ asset('icon/avatar.png') }}" alt="">
-                        &nbsp;
-                        Anisa Dewi
-                    </th>
-                    <td>anisa@gmail.com</td>
-                    <td>082284789876</td>
-                    <td>Mar 20, 2023</td>
-                    <td>Personal</td>
-                    <td>
-                        <div class="dropdown-dot">
-                            <i onclick="dotDetail()" class="fa-solid fa-ellipsis dropbtn-dot "></i>
-                            <div id="myDropdownDot" class="dropdown-content-dot">
-
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <section class="nav-dash">
+        <center>
+            <img src="{{ asset('img/logo.png') }}" style="width: 100%; object-fit: cover;z-index: 100">
+        </center>
+        <h1>
+            WELCOME, <br><br> {{ Auth::user()->name }}
+        </h1>
+    </section>
 </div>
 @endsection
