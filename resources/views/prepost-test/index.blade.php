@@ -30,8 +30,8 @@ Pre - Post Test
     input {
         display: inline-block;
         vertical-align: middle;
-        margin-top: -3px !important;
-        margin-right: 5px !important;
+        margin-top: 2px !important;
+        margin-right: 8px !important;
     }
 
     .question {
@@ -41,7 +41,7 @@ Pre - Post Test
 
     h3.sub-title {
         font-size: 20px;
-        font-weight: 600;
+        font-weight: 700;
         text-decoration: none;
         margin-top: 20px;
         margin-bottom: 20px
@@ -76,6 +76,38 @@ Pre - Post Test
         border-bottom: 1px solid #000;
         margin-bottom: 20px
     }
+
+    .answer {
+        margin-left: 25px;
+        display: flex;
+        justify-content: left;
+        align-content: center;
+    }
+
+    [type="checkbox"],
+    [type="radio"] {
+        width: 15px !important;
+    }
+
+    @media(max-width: 600px) {
+        .answer {
+            margin-left: 0px
+        }
+
+        input {
+            margin-right: 10px !important
+        }
+
+        [type="checkbox"],
+        [type="radio"] {
+            width: 30px !important;
+        }
+
+        .question {
+            line-height: 25px;
+            font-size: 18px
+        }
+    }
 </style>
 
 @section('content')
@@ -94,13 +126,13 @@ Pre - Post Test
             <h5 class="question">
                 1. Apa yang dimaksud dengan kepemimpinan?
             </h5>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11a" name="leadership[1a]"
                     value="Tindakan mengelola orang dan sumber daya dalam suatu organisasi" required>
                 <label for="11a">Tindakan mengelola orang dan sumber daya dalam suatu organisasi</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11b" name="leadership[1b]"
                     value="Kemampuan untuk mempengaruhi dan membimbing orang lain untuk mencapai tujuan bersama"
                     required>
@@ -108,13 +140,13 @@ Pre - Post Test
                     bersama</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11c" name="leadership[1c]"
                     value="Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim" required>
                 <label for="11c">Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11d" name="leadership[1d]"
                     value="Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim" required>
                 <label for="11d">Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim</label>
@@ -125,13 +157,13 @@ Pre - Post Test
             <h5 class="question">
                 2. Apa yang dimaksud dengan kepemimpinan?
             </h5>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11a" name="leadership[1a]"
                     value="Tindakan mengelola orang dan sumber daya dalam suatu organisasi" required>
                 <label for="11a">Tindakan mengelola orang dan sumber daya dalam suatu organisasi</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11b" name="leadership[1b]"
                     value="Kemampuan untuk mempengaruhi dan membimbing orang lain untuk mencapai tujuan bersama"
                     required>
@@ -139,13 +171,13 @@ Pre - Post Test
                     bersama</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11c" name="leadership[1c]"
                     value="Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim" required>
                 <label for="11c">Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11d" name="leadership[1d]"
                     value="Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim" required>
                 <label for="11d">Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim</label>
@@ -156,13 +188,13 @@ Pre - Post Test
             <h5 class="question">
                 3. Apa yang dimaksud dengan kepemimpinan?
             </h5>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11a" name="leadership[1a]"
                     value="Tindakan mengelola orang dan sumber daya dalam suatu organisasi" required>
                 <label for="11a">Tindakan mengelola orang dan sumber daya dalam suatu organisasi</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11b" name="leadership[1b]"
                     value="Kemampuan untuk mempengaruhi dan membimbing orang lain untuk mencapai tujuan bersama"
                     required>
@@ -170,13 +202,13 @@ Pre - Post Test
                     bersama</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11c" name="leadership[1c]"
                     value="Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim" required>
                 <label for="11c">Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11d" name="leadership[1d]"
                     value="Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim" required>
                 <label for="11d">Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim</label>
@@ -191,13 +223,13 @@ Pre - Post Test
             <h5 class="question">
                 1. Apa yang dimaksud dengan kepemimpinan?
             </h5>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11a" name="leadership[1a]"
                     value="Tindakan mengelola orang dan sumber daya dalam suatu organisasi" required>
                 <label for="11a">Tindakan mengelola orang dan sumber daya dalam suatu organisasi</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11b" name="leadership[1b]"
                     value="Kemampuan untuk mempengaruhi dan membimbing orang lain untuk mencapai tujuan bersama"
                     required>
@@ -205,13 +237,13 @@ Pre - Post Test
                     bersama</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11c" name="leadership[1c]"
                     value="Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim" required>
                 <label for="11c">Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11d" name="leadership[1d]"
                     value="Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim" required>
                 <label for="11d">Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim</label>
@@ -222,13 +254,13 @@ Pre - Post Test
             <h5 class="question">
                 2. Apa yang dimaksud dengan kepemimpinan?
             </h5>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11a" name="leadership[1a]"
                     value="Tindakan mengelola orang dan sumber daya dalam suatu organisasi" required>
                 <label for="11a">Tindakan mengelola orang dan sumber daya dalam suatu organisasi</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11b" name="leadership[1b]"
                     value="Kemampuan untuk mempengaruhi dan membimbing orang lain untuk mencapai tujuan bersama"
                     required>
@@ -236,13 +268,13 @@ Pre - Post Test
                     bersama</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11c" name="leadership[1c]"
                     value="Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim" required>
                 <label for="11c">Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11d" name="leadership[1d]"
                     value="Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim" required>
                 <label for="11d">Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim</label>
@@ -253,13 +285,13 @@ Pre - Post Test
             <h5 class="question">
                 3. Apa yang dimaksud dengan kepemimpinan?
             </h5>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11a" name="leadership[1a]"
                     value="Tindakan mengelola orang dan sumber daya dalam suatu organisasi" required>
                 <label for="11a">Tindakan mengelola orang dan sumber daya dalam suatu organisasi</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11b" name="leadership[1b]"
                     value="Kemampuan untuk mempengaruhi dan membimbing orang lain untuk mencapai tujuan bersama"
                     required>
@@ -267,13 +299,13 @@ Pre - Post Test
                     bersama</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11c" name="leadership[1c]"
                     value="Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim" required>
                 <label for="11c">Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11d" name="leadership[1d]"
                     value="Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim" required>
                 <label for="11d">Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim</label>
@@ -288,13 +320,13 @@ Pre - Post Test
             <h5 class="question">
                 1. Apa yang dimaksud dengan kepemimpinan?
             </h5>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11a" name="leadership[1a]"
                     value="Tindakan mengelola orang dan sumber daya dalam suatu organisasi" required>
                 <label for="11a">Tindakan mengelola orang dan sumber daya dalam suatu organisasi</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11b" name="leadership[1b]"
                     value="Kemampuan untuk mempengaruhi dan membimbing orang lain untuk mencapai tujuan bersama"
                     required>
@@ -302,13 +334,13 @@ Pre - Post Test
                     bersama</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11c" name="leadership[1c]"
                     value="Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim" required>
                 <label for="11c">Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11d" name="leadership[1d]"
                     value="Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim" required>
                 <label for="11d">Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim</label>
@@ -319,13 +351,13 @@ Pre - Post Test
             <h5 class="question">
                 2. Apa yang dimaksud dengan kepemimpinan?
             </h5>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11a" name="leadership[1a]"
                     value="Tindakan mengelola orang dan sumber daya dalam suatu organisasi" required>
                 <label for="11a">Tindakan mengelola orang dan sumber daya dalam suatu organisasi</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11b" name="leadership[1b]"
                     value="Kemampuan untuk mempengaruhi dan membimbing orang lain untuk mencapai tujuan bersama"
                     required>
@@ -333,13 +365,13 @@ Pre - Post Test
                     bersama</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11c" name="leadership[1c]"
                     value="Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim" required>
                 <label for="11c">Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11d" name="leadership[1d]"
                     value="Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim" required>
                 <label for="11d">Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim</label>
@@ -350,13 +382,13 @@ Pre - Post Test
             <h5 class="question">
                 3. Apa yang dimaksud dengan kepemimpinan?
             </h5>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11a" name="leadership[1a]"
                     value="Tindakan mengelola orang dan sumber daya dalam suatu organisasi" required>
                 <label for="11a">Tindakan mengelola orang dan sumber daya dalam suatu organisasi</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11b" name="leadership[1b]"
                     value="Kemampuan untuk mempengaruhi dan membimbing orang lain untuk mencapai tujuan bersama"
                     required>
@@ -364,13 +396,13 @@ Pre - Post Test
                     bersama</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11c" name="leadership[1c]"
                     value="Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim" required>
                 <label for="11c">Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim</label>
                 <br>
             </div>
-            <div class="answer" style="margin-left: 25px">
+            <div class="answer">
                 <input type="radio" id="11d" name="leadership[1d]"
                     value="Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim" required>
                 <label for="11d">Proses pengambilan keputusan dan pemecahan masalah dalam sebuah tim</label>
@@ -379,7 +411,6 @@ Pre - Post Test
         </div>
     </div>
 
-    <button type="submit" class="divi-delayed-button-2" style="width:100%">SUBMIT POST
-        TEST PUS</button>
+    <button type="submit" class="divi-delayed-button-2" style="width:100%">SUBMIT</button>
 </div>
 @endsection
