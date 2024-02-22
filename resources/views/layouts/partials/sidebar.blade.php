@@ -51,7 +51,7 @@
 <nav id="myNav">
     <div class="menu-items">
         <ul class="nav-links">
-            <li class="{{routeActive(['home', 'mapping', 'placement.index'])}}">
+            <li class="{{routeActive('home')}}">
                 <a href="{{ route('home') }}">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -62,54 +62,11 @@
                             stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
 
-                    <span class="link-name">Placement</span>
+                    <span class="link-name">Beranda</span>
                 </a>
             </li>
 
-            <li class="{{routeActive(['stockbalance', 'detailbalance', 'mappingcs'])}} dropdown">
-                <a href="javascript:void(0)">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 19V5C4 3.89543 4.89543 3 6 3H19.4C19.7314 3 20 3.26863 20 3.6V16.7143"
-                            stroke-width="1.5" stroke-linecap="round" />
-                        <path d="M10 14C10 14 10.9 10.8824 13 9" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                        <path
-                            d="M12.8022 12.4246L12.6677 12.4372C10.9758 12.5962 9.469 11.3542 9.30214 9.66304C9.13527 7.97193 10.3715 6.47214 12.0634 6.31317L15.049 6.03263C15.2406 6.01463 15.4111 6.15524 15.43 6.34669L15.6847 8.92762C15.8589 10.693 14.5683 12.2586 12.8022 12.4246Z"
-                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M6 17L20 17" stroke-width="1.5" stroke-linecap="round" />
-                        <path d="M6 21L20 21" stroke-width="1.5" stroke-linecap="round" />
-                        <path d="M6 21C4.89543 21 4 20.1046 4 19C4 17.8954 4.89543 17 6 17" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
 
-
-                    <span class="link-name">Report</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"
-                        width="14" height="14" version="1.1" id="Layer_1" viewBox="0 0 330 330" xml:space="preserve"
-                        style="position: absolute; right: 5px;
-                        top: 20px;">
-                        <path id="XMLID_225_"
-                            d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393  c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393  s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z" />
-                    </svg>
-                </a>
-                <ul class="nav-submenu menu-content">
-                    <li>
-                        <a href="{{ route('stockbalance') }}" class="{{routeActive(['stockbalance'])}}">
-                            Stock Balance
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('detailbalance') }}" class="{{routeActive(['detailbalance'])}}">
-                            Detail Balance
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('mappingcs') }}" class="{{routeActive(['mappingcs'])}}">
-                            Mapping Cold Storage
-                        </a>
-                    </li>
-                </ul>
-            </li>
 
         </ul>
     </div>

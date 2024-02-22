@@ -204,7 +204,7 @@
 
     <center><img src="{{ asset('img/logo.png') }}" style="width: 100%; object-fit: cover;z-index: 100"></center>
     <h1>
-      <font face="cjfont">RPA KUNINGAN <BR /> RFID SYSTEM</font>
+      <font face="cjfont">HR PROGRAM</font>
     </h1>
     {{-- <h2>Global Innovation Growht<br>New Business Challenge<br></h2> --}}
 
