@@ -27,3 +27,4 @@ Auth::routes([
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/pre-posttest', [App\Http\Controllers\PrepostTestController::class, 'index'])->name('prepost.index');
+Route::post('/pre-posttest/store', [App\Http\Controllers\PrepostTestController::class, 'store'])->name('prepost.store');
