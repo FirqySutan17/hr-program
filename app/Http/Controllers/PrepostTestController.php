@@ -92,6 +92,10 @@ class PrepostTestController extends Controller
         return redirect()->route('home');
     }
 
+    public function result() {
+        return view('prepost-test.result');
+    }
+
     /**
      * Display the specified resource.
      *

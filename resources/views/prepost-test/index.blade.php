@@ -113,9 +113,9 @@ Pre - Post Test
 @section('content')
 <div class="main-content pre-posttest">
     <h3 class="card-title">
-        HR Program - PRE/POST TEST
+        HR Program - {{ $ujian->nama }}
     </h3>
-    <h4>Soft Skill (Leadership, Communication, dan Team Work)</h4>
+    <h4>{{ $ujian->desc }}</h4>
     <h5 style="font-size: 14px; padding: 10px 0px 20px 0px; text-align: left;font-style: italic; font-weight: 600">*Note
         :
         Pilih opsi yang benar untuk setiap pertanyaan dan tulis huruf yang sesuai pada lembar jawaban Anda.</h5>
@@ -134,12 +134,12 @@ Pre - Post Test
                 </h5>
                 <input type="hidden" name="soal[]" value="{{ $soal['soal']->id.'-'.$soal['soal']->jawaban_id }}">
                 @foreach ($soal['jawaban'] as $jawaban)
-                    <div class="answer">
-                        <input type="radio" id="{{ $jawaban->id }}" name="jawaban[{{ $jawaban->soal_id }}]"
-                            value="{{ $jawaban->id }}" required>
-                        <label for="{{ $jawaban->id }}">{{ $jawaban->jawaban }}</label>
-                        <br>
-                    </div>
+                <div class="answer">
+                    <input type="radio" id="{{ $jawaban->id }}" name="jawaban[{{ $jawaban->soal_id }}]"
+                        value="{{ $jawaban->id }}" required>
+                    <label for="{{ $jawaban->id }}">{{ $jawaban->jawaban }}</label>
+                    <br>
+                </div>
                 @endforeach
             </div>
             @endforeach
