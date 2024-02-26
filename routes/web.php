@@ -26,14 +26,14 @@ Auth::routes([
 ]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/training/{flag}', [App\Http\Controllers\PrepostTestController::class, 'index'])->name('training.index');
+    Route::post('/training/{flag}/store', [App\Http\Controllers\PrepostTestController::class, 'store'])->name('training.store');
 
+    // EVALUASI
+    Route::get('/evaluasi/{flag}', [App\Http\Controllers\EvaluasiController::class, 'index'])->name('evaluasi.index');
+    Route::post('/evaluasi/{flag}/store', [App\Http\Controllers\EvaluasiController::class, 'store'])->name('evaluasi.store');
 
-Route::get('/training/{flag}', [App\Http\Controllers\PrepostTestController::class, 'index'])->name('training.index');
-Route::post('/training/{flag}/store', [App\Http\Controllers\PrepostTestController::class, 'store'])->name('training.store');
-
-// EVALUASI
-Route::get('/evaluasi/{flag}', [App\Http\Controllers\EvaluasiController::class, 'index'])->name('evaluasi.index');
-Route::post('/evaluasi/{flag}/store', [App\Http\Controllers\EvaluasiController::class, 'store'])->name('evaluasi.store');
-
-// REPORT
-Route::get('/report', [App\Http\Controllers\ReportController::class, 'index'])->name('report.index');
+    // REPORT
+    Route::get('/report', [App\Http\Controllers\ReportController::class, 'index'])->name('report.index');
+});
