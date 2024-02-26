@@ -82,6 +82,18 @@
             </li>
             @endif
 
+            <li class="mt-5">
+                <a class="btn btn-block btn-danger" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                    LOGOUT
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+                {{-- <a class="btn btn-block btn-danger" href="{{ route('logout') }}">
+                    <span class="link-name text-white">LOGOUT</span>
+                </a> --}}
+            </li>
         </ul>
     </div>
 </nav>
