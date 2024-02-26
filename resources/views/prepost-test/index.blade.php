@@ -120,7 +120,7 @@ Pre - Post Test
         :
         Pilih opsi yang benar untuk setiap pertanyaan dan tulis huruf yang sesuai pada lembar jawaban Anda.</h5>
 
-    <form action="{{ route('prepost.store') }}" method="POST">
+    <form action="{{ route('training.store', $ujian->flag) }}" method="POST">
         @csrf
         <input type="hidden" name="ujian" value="{{ $ujian->id }}">
         <input type="hidden" name="start_date" value="{{ $start_date }}">
@@ -133,6 +133,7 @@ Pre - Post Test
                     {{ $loop->iteration }}. {{ $soal['soal']->soal }}
                 </h5>
                 <input type="hidden" name="soal[]" value="{{ $soal['soal']->id.'-'.$soal['soal']->jawaban_id }}">
+                <input type="hidden" name="soal_type[]" value="{{ $soal['soal']->type }}">
                 @foreach ($soal['jawaban'] as $jawaban)
                 <div class="answer">
                     <input type="radio" id="{{ $jawaban->id }}" name="jawaban[{{ $jawaban->soal_id }}]"

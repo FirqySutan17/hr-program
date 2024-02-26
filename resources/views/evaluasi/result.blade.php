@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-Result | Pre - Post Test
+Pre - Post Test
 @endsection
 
 <style>
@@ -15,92 +15,140 @@ Result | Pre - Post Test
         font-style: italic
     }
 
-    .modal-bullet .modal-body {
-        padding: 0px !important
+    .qna {
+        margin-bottom: 20px
     }
 
-    .modal-bullet .card-body {
-        padding: 0px !important
+    .qna label {
+        font-weight: 500 !important;
     }
 
-    .modal-bullet .card {
-        padding: 0px !important;
-        margin: 0px !important;
+    .answer {
+        margin-top: 10px
     }
 
-    .modal-bullet p {
-        margin: 0px !important;
-        padding: 0px !important
+    input {
+        display: inline-block;
+        vertical-align: middle;
+        margin-top: 2px !important;
+        margin-right: 8px !important;
     }
 
-    .carousel-indicators li {
-        background-color: #000;
+    .question {
+        font-size: 17px;
+        font-weight: 600
     }
 
-    .result-view {
-        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-        padding: 70px 20px;
-        border-radius: 10px;
-        margin-top: 30px;
-        margin-bottom: 30px
-    }
-
-    .result-view p {
+    h3.sub-title {
         font-size: 20px;
-        text-align: center
+        font-weight: 700;
+        text-decoration: none;
+        margin-top: 20px;
+        margin-bottom: 20px
     }
 
-    h1.poin {
-        font-size: 56px;
-        font-weight: 800
+    .box-att {
+        background: #007bff;
+        color: #fff;
+        padding: 20px;
+        border-radius: 10px
     }
 
     .divi-delayed-button-2 {
-        float: right;
-        margin-top: 20px;
+        text-align: center;
         padding: 15px;
         font-weight: 800;
-        font-size: 26px;
+        font-size: 18px;
         border: none;
         /* border-top-right-radius: 10px; */
         background: #007bff;
         color: #fff;
+        border-radius: 8px;
+        margin-bottom: 20px
     }
 
     .divi-delayed-button-2:hover {
         background: #58a9ff
+    }
+
+    .content-task {
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
+        margin-bottom: 20px
+    }
+
+    .answer {
+        margin-left: 25px;
+        display: flex;
+        justify-content: left;
+        align-content: center;
+    }
+
+    [type="checkbox"],
+    [type="radio"] {
+        width: 15px !important;
+    }
+
+    @media(max-width: 600px) {
+        .answer {
+            margin-left: 0px
+        }
+
+        input {
+            margin-right: 10px !important
+        }
+
+        [type="checkbox"],
+        [type="radio"] {
+            width: 30px !important;
+        }
+
+        .question {
+            line-height: 25px;
+            font-size: 18px
+        }
     }
 </style>
 
 @section('content')
 <div class="main-content pre-posttest">
     <h3 class="card-title">
-        HR Program - RESULT PRE/POST TEST
+        HR Program - {{ $ujian->nama }}
     </h3>
-    <h4>Soft Skill (Leadership, Communication, dan Team Work)</h4>
+    <h4>{{ $ujian->desc }}</h4>
+    <p>NPK <br> <strong>{{ Auth::user()->employee_id}}</strong> </p>
+    <P>NAMA <br> <strong>{{ Auth::user()->name }}</strong> </P>
 
-    <div class="result-view" style="display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                flex-direction: column;">
-        <p>NPK <br> <strong>{{ Auth::user()->employee_id}}</strong> </p>
-        <P>NAMA <br> <strong>{{ Auth::user()->name }}</strong> </P>
-        <h1 class="poin">100</h1>
-        <p>POINTS</p>
-        <br>
-        <p>BENAR : 15</p>
-        <p>SALAH : 0</p>
-
-        {{-- @if ($result->score >= '80')
-        <a style="text-align: center" href="{{url('portal/cj-kepatuhan/training')}}" class="divi-delayed-button-2">BACK
-            TO MENU</a>
-        @else
-        <a style="text-align: center" href="{{url('portal/cj-kepatuhan/training/pus-posttest')}}"
-            class="divi-delayed-button-2">TEST AGAIN</a>
-        @endif --}}
-
-        {{-- <a style="text-align: center" href="{{ route('prepost.index')}}" class="divi-delayed-button-2">BACK
-            TO MENU</a> --}}
+    <?php $jawaban_user = json_decode($ujian_user->json_jawaban); ?>
+    @foreach ($soal_data as $data)
+    <div class="content-task">
+        <h3 class="sub-title">BAG : {{ strtoupper($data['nama']) }}</h3>
+        @foreach ($data['data'] as $soal)
+        <?php 
+            $key = array_search($soal['soal']->id, array_column($jawaban_user, 'soal_id'));
+            $jawab = $jawaban_user[$key];
+        ?>
+        <div class="qna">
+            <h5 class="question">
+                {{ $loop->iteration }}. {{ $soal['soal']->soal }}
+            </h5>
+            @if ($soal['soal']->type == 1)
+                <div class="answer">
+                    <textarea cols="5" rows="10" class="form-control" readonly>{{ $jawab->jawaban_id }}</textarea>
+                </div>
+            @else
+                @foreach ($soal['jawaban'] as $jawaban)
+                <div class="answer">
+                    <input type="radio"
+                        value="{{ $jawaban->id }}" disabled {{ $jawaban->id == $jawab->jawaban_id ? 'checked' : '' }} >
+                    <label for="{{ $jawaban->id }}">{{ $jawaban->jawaban }}</label>
+                    <br>
+                </div>
+                @endforeach
+            @endif
+        </div>
+        @endforeach
     </div>
+    @endforeach
 </div>
 @endsection

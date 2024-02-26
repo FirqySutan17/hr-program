@@ -15,10 +15,19 @@ class PrepostTestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($flag)
     {
-        $ujian  = DB::table('tb_ujian')->where('id', 1)->First();
-        $soal   = DB::table('tb_soal')->select('tb_soal.*', 'tb_bagian.nama as nama_bagian')->join('tb_bagian', 'tb_bagian.id', 'tb_soal.bagian_id')->orderBy('tb_bagian.id', 'ASC')->orderBy('tb_soal.id', 'ASC')->get();
+        $ujian  = DB::table('tb_ujian')->where('flag', $flag)->first();
+        if (empty($ujian)) {
+            return redirect()->route('home');
+        }
+
+        $ujian_user = DB::table('tb_ujian_user')->where('ujian_id', $ujian->id)->where('employee_id', auth()->user()->employee_id)->first();
+        if (!empty($ujian_user)) {
+            return view('prepost-test.result', compact('ujian_user', 'ujian'));
+        }
+
+        $soal   = DB::table('tb_soal')->select('tb_soal.*', 'tb_bagian.nama as nama_bagian')->join('tb_bagian', 'tb_bagian.id', 'tb_soal.bagian_id')->join('tb_ujian_bagian', 'tb_ujian_bagian.bagian_id', 'tb_bagian.id')->where('tb_ujian_bagian.ujian_id', $ujian->id)->orderBy('tb_bagian.id', 'ASC')->orderBy('tb_soal.id', 'ASC')->get();
         $jawaban   = DB::table('tb_jawaban')->orderBy('soal_id', 'ASC')->get();
 
         $soal_data = [];
@@ -59,24 +68,28 @@ class PrepostTestController extends Controller
     {
         $ujian_id   = $request->ujian;
         $soal       = $request->soal;
+        $soal_type       = $request->soal_type;
         $jawaban    = $request->jawaban;
 
         $jawaban_user = [];
         $skor       = 0;
-        foreach ($soal as $v) {
+        foreach ($soal as $index => $v) {
+            $type = $soal_type[$index];
             $pecah = explode("-", $v);
             $soal_id    = $pecah[0];
-            $jawaban_benar_id = $pecah[1];
-
             $jawab = $jawaban[$soal_id];
+
+            if ($type == 0) {
+                $jawaban_benar_id = $pecah[1];
+                if ($jawab == $jawaban_benar_id) {
+                    $skor += 10;
+                }
+            }
 
             $jawaban_user[] = [
                 "soal_id"       => $soal_id,
                 "jawaban_id"    => $jawab
             ];
-            if ($jawab == $jawaban_benar_id) {
-                $skor += 10;
-            }
         }
         $json_jawaban_user = json_encode($jawaban_user);
         $save_ujian = [
@@ -89,7 +102,7 @@ class PrepostTestController extends Controller
         ];
         
         $insert = DB::table('tb_ujian_user')->insert($save_ujian);
-        return redirect()->route('home');
+        return redirect()->back();
     }
 
     public function result() {

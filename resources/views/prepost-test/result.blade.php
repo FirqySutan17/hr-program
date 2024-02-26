@@ -85,11 +85,11 @@ Result | Pre - Post Test
                                 flex-direction: column;">
         <p>NPK <br> <strong>{{ Auth::user()->employee_id}}</strong> </p>
         <P>NAMA <br> <strong>{{ Auth::user()->name }}</strong> </P>
-        <h1 class="poin">100</h1>
+        <h1 class="poin">{{ $ujian_user->score }}</h1>
         <p>POINTS</p>
-        <br>
-        <p>BENAR : 15</p>
-        <p>SALAH : 0</p>
+        {{-- <br> --}}
+        {{-- <p>BENAR : 15</p>
+        <p>SALAH : 0</p> --}}
 
         {{-- @if ($result->score >= '80')
         <a style="text-align: center" href="{{url('portal/cj-kepatuhan/training')}}" class="divi-delayed-button-2">BACK
