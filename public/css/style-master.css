@@ -297,6 +297,11 @@ body.dark li a:hover:before {
     font-family: pjsMedium;
     color: #0f172a;
     margin-left: 20px;
+    width: 90%;
+}
+.icons-menu {
+    width: 10%;
+    text-align: right;
 }
 nav.close li a .link-name {
     opacity: 0;
