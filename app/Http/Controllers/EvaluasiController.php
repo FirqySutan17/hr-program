@@ -23,6 +23,14 @@ class EvaluasiController extends Controller
             return redirect()->route('home');
         }
 
+        if ($ujian->id > 1) {
+            $previous_test_id = $ujian->id - 1;
+            $previous_ujian_user = DB::table('tb_ujian_user')->where('ujian_id', $previous_test_id)->where('employee_id', auth()->user()->employee_id)->first();
+            if (empty($previous_ujian_user)) {
+                return redirect()->route('home');
+            }
+        }
+
         $ujian_user = DB::table('tb_ujian_user')->where('ujian_id', $ujian->id)->where('employee_id', auth()->user()->employee_id)->first();
 
         $soal   = DB::table('tb_soal')->select('tb_soal.*', 'tb_bagian.nama as nama_bagian')->join('tb_bagian', 'tb_bagian.id', 'tb_soal.bagian_id')->join('tb_ujian_bagian', 'tb_ujian_bagian.bagian_id', 'tb_bagian.id')->where('tb_ujian_bagian.ujian_id', $ujian->id)->orderBy('tb_bagian.id', 'ASC')->orderBy('tb_soal.id', 'ASC')->get();
