@@ -64,8 +64,8 @@
                 </a>
             </li>
 
-            <li class="{{routeActive('report.index')}}">
-                <a href="{{ route('report.index') }}">
+            <li class="{{routeActive('training.index', 'pre-test')}}">
+                <a href="{{ route('training.index', 'pre-test') }}">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M14 14V6M14 14L20.1023 17.487C20.5023 17.7156 21 17.4268 21 16.9661V3.03391C21 2.57321 20.5023 2.28439 20.1023 2.51296L14 6M14 14H7C4.79086 14 3 12.2091 3 10V10C3 7.79086 4.79086 6 7 6H14"
@@ -76,14 +76,11 @@
                     </svg>
 
                     <span class="link-name">Pre - Test</span>
-                    <div class="icon-menu">
-                        <i class="fa-solid fa-circle" style="color: lightgreen"></i>
-                    </div>
                 </a>
             </li>
 
-            <li class="{{routeActive('report.index')}}">
-                <a href="{{ route('report.index') }}">
+            <li class="{{routeActive('training.index', 'post-test')}}">
+                <a href="{{ route('training.index', 'post-test') }}">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7 12L17 12" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         <path d="M7 8L13 8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -93,14 +90,14 @@
                     </svg>
 
                     <span class="link-name">Post - Test</span>
-                    <div class="icon-menu">
+                    {{-- <div class="icon-menu">
                         <i class="fa-solid fa-ban" style="color: red"></i>
-                    </div>
+                    </div> --}}
                 </a>
             </li>
 
-            <li class="{{routeActive('report.index')}}">
-                <a href="{{ route('report.index') }}">
+            <li class="{{routeActive('evaluasi.index', 'evaluasi-test')}}">
+                <a href="{{ route('evaluasi.index', 'evaluasi-test') }}">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M4 19V5C4 3.89543 4.89543 3 6 3H19.4C19.7314 3 20 3.26863 20 3.6V16.7143"
                             stroke-width="1.5" stroke-linecap="round" />
@@ -116,9 +113,6 @@
                     </svg>
 
                     <span class="link-name">Evaluasi</span>
-                    <div class="icon-menu">
-                        <i class="fa-solid fa-ban" style="color: red"></i>
-                    </div>
                 </a>
             </li>
 

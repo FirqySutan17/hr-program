@@ -35,5 +35,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/evaluasi/{flag}/store', [App\Http\Controllers\EvaluasiController::class, 'store'])->name('evaluasi.store');
 
     // REPORT
-    Route::get('/report', [App\Http\Controllers\ReportController::class, 'index'])->name('report.index');
+    Route::match(['get', 'post'], '/report', [App\Http\Controllers\ReportController::class, 'index'])->name('report.index');
 });

@@ -22,6 +22,14 @@ class PrepostTestController extends Controller
             return redirect()->route('home');
         }
 
+        if ($ujian->id > 1) {
+            $previous_test_id = $ujian->id - 1;
+            $previous_ujian_user = DB::table('tb_ujian_user')->where('ujian_id', $previous_test_id)->where('employee_id', auth()->user()->employee_id)->first();
+            if (empty($previous_ujian_user)) {
+                return redirect()->route('home');
+            }
+        }
+
         $ujian_user = DB::table('tb_ujian_user')->where('ujian_id', $ujian->id)->where('employee_id', auth()->user()->employee_id)->first();
         if (!empty($ujian_user)) {
             return view('prepost-test.result', compact('ujian_user', 'ujian'));
