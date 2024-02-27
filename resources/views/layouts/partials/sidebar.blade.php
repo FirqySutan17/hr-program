@@ -48,10 +48,6 @@
     }
 </style>
 
-<?php 
-$uu = DB::table('tb_ujian_user')->where('ujian_id', $ujian->id)->where('employee_id', auth()->user()->employee_id)->first();
-?>
-
 <nav id="myNav">
     <div class="menu-items">
         <ul class="nav-links">
@@ -82,9 +78,6 @@ $uu = DB::table('tb_ujian_user')->where('ujian_id', $ujian->id)->where('employee
                     <span class="link-name">Pre - Test</span>
                     <div class="icon-menu">
                         <i class="fa-solid fa-circle" style="color: lightgreen"></i>
-                    </div>
-                    <div class="icon-menu">
-                        <i class="fa-solid fa-check" style="color: green"></i>
                     </div>
                 </a>
             </li>
