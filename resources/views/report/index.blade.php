@@ -121,6 +121,21 @@ Report
         HR Program - Report PRE/POST TEST
     </h3>
     <h4>Soft Skill (Leadership, Communication, dan Team Work)</h4>
+    <form class="form-horizontal mb-5" action="{{ route('report.index') }}" method="POST">
+        @csrf
+        <div class="row">
+            <div class="col-md-8">
+                <select name="ujian" class="form-control">
+                    @foreach ($ujian_data as $ujian)
+                    <option {{ $ujian->id == $ujian_id ? 'selected' : '' }} value="{{ $ujian->id }}">{{ $ujian->nama }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary btn-block">FILTER</button>
+            </div>
+        </div>
+    </form>
     <table class="table table-bordered table-hover" id="example1">
         <thead>
             <tr>
@@ -133,17 +148,16 @@ Report
             </tr>
         </thead>
         <tbody>
+            @foreach ($ujian_user as $uu)
             <tr>
-                <td style="text-align: center; vertical-align: middle">1</td>
-                <td style="text-align: center; vertical-align: middle">01220023</td>
-                <td style="vertical-align: middle">FIRQY SUTANWALIYAH IKHSAN
-                </td>
-                <td style="text-align: center; vertical-align: middle">Plant
-                </td>
-                <td style="text-align: center; vertical-align: middle">Department
-                </td>
-                <td style="text-align: center; vertical-align: middle">90</td>
+                <td style="text-align: center; vertical-align: middle">{{ $loop->iteration }}</td>
+                <td style="text-align: center; vertical-align: middle">{{ $uu->employee_id }}</td>
+                <td style="vertical-align: middle">{{ $uu->name }}</td>
+                <td style="text-align: center; vertical-align: middle">{{ $uu->plant_name }}</td>
+                <td style="text-align: center; vertical-align: middle">{{ $uu->dept_name }}</td>
+                <td style="text-align: center; vertical-align: middle">{{ $uu->score }}</td>
             </tr>
+            @endforeach
         </tbody>
     </table>
 </div>
