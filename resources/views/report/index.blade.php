@@ -5,6 +5,15 @@ Report
 @endsection
 
 @push('css-external')
+<link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('vendor/select2/css/select2-bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/display.css') }}">
+<link rel="stylesheet" href="{{ asset('css/w3.css') }}">
+<link rel="stylesheet" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}">
+<link rel="stylesheet" href="{{ asset('vendor/Ionicons/css/ionicons.min.css') }}">
+<link rel="stylesheet" href="{{ asset('vendor/dist/css/AdminLTE.css') }}">
+<link rel="stylesheet" href="{{ asset('vendor/dist/css/skins/_all-skins.min.css') }}">
 <link rel="stylesheet" href="{{ asset('vendor/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('vendor/datatables.net-bs/css/buttons.dataTables.min.css') }}">
 @endpush
@@ -115,6 +124,94 @@ Report
     }
 </style>
 
+<style>
+    table.dataTable th {
+        position: relative;
+        text-align: center
+    }
+
+    table.dataTable thead .sorting:after,
+    table.dataTable thead .sorting_asc:after,
+    table.dataTable thead .sorting_desc:after,
+    table.dataTable thead .sorting_asc_disabled:after,
+    table.dataTable thead .sorting_desc_disabled:after {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+    }
+
+    table.dataTable thead>tr>th.sorting_asc,
+    table.dataTable thead>tr>th.sorting_desc,
+    table.dataTable thead>tr>th.sorting,
+    table.dataTable thead>tr>td.sorting_asc,
+    table.dataTable thead>tr>td.sorting_desc,
+    table.dataTable thead>tr>td.sorting {
+        padding: 10px 20px;
+    }
+
+    .table>tbody>tr>td,
+    .table>tbody>tr>th,
+    .table>tfoot>tr>td,
+    .table>tfoot>tr>th,
+    .table>thead>tr>td,
+    .table>thead>tr>th {
+        vertical-align: middle;
+    }
+
+    select.input-sm {
+        height: 40px;
+        line-height: 30px;
+        text-align: center;
+    }
+
+    .box-header {
+        background: #3c8dbc;
+        border: 4px solid #000;
+        border-radius: 10px 10px 0px 0px;
+        padding: 25px 0px;
+    }
+
+    .box.box-solid.box-primary {
+        border-top: none;
+        border: 0px solid transparent
+    }
+
+    .box-title {
+        font-size: 24px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #fff;
+    }
+
+    .box.box-info {
+        border-top-color: transparent;
+    }
+
+    .content {
+        padding: 0px
+    }
+
+    .date-range {
+        background-color: #000;
+        color: #fff;
+        text-align: center;
+        width: 100%;
+        padding: 8px 16px;
+        border-radius: 0px 0px 10px 10px;
+        border: 2px solid #000;
+        font-weight: 600
+    }
+
+    .box-header.with-border {
+        border-bottom: 1px solid #f4f4f4;
+    }
+
+    select.input-sm {
+        height: 30px;
+        line-height: 18px !important;
+    }
+</style>
+
 @section('content')
 <div class="main-content pre-posttest">
     <h3 class="card-title">
@@ -123,16 +220,22 @@ Report
     <h4>Soft Skill (Leadership, Communication, dan Team Work)</h4>
     <form class="form-horizontal mb-5" action="{{ route('report.index') }}" method="POST">
         @csrf
-        <div class="row">
-            <div class="col-md-8">
-                <select name="ujian" class="form-control">
+        <div class="row"
+            style="margin-top: 30px; border: 1px solid #000; border-right: 0px solid #000; border-left: 0px solid #000; padding: 20px 0px;">
+            <div class="col-md-8 col-sm-12">
+                <select name="ujian" class="form-control" style="border-radius: 8px; height: 40px">
                     @foreach ($ujian_data as $ujian)
-                    <option {{ $ujian->id == $ujian_id ? 'selected' : '' }} value="{{ $ujian->id }}">{{ $ujian->nama }}</option>
+                    <option {{ $ujian->id == $ujian_id ? 'selected' : '' }} value="{{ $ujian->id }}">{{ $ujian->nama }}
+                    </option>
                     @endforeach
                 </select>
             </div>
-            <div class="col-md-4">
-                <button type="submit" class="btn btn-primary btn-block">FILTER</button>
+            <div class="col-md-2 col-sm-6">
+                <button type="submit" class="btn btn-primary btn-block" style="height: 40px">FILTER</button>
+            </div>
+            <div class="col-md-2 col-sm-6">
+                <button type="button" class="btn btn-primary btn-block"
+                    style="height: 40px; background: green">EXPORT</button>
             </div>
         </div>
     </form>

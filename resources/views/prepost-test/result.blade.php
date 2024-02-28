@@ -74,8 +74,9 @@ Result | Pre - Post Test
 
 @section('content')
 <div class="main-content pre-posttest">
+    @include('sweetalert::alert')
     <h3 class="card-title">
-        HR Program - RESULT PRE/POST TEST
+        HR Program - RESULT
     </h3>
     <h4>Soft Skill (Leadership, Communication, dan Team Work)</h4>
 

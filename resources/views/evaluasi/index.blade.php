@@ -112,6 +112,7 @@ Pre - Post Test
 
 @section('content')
 <div class="main-content pre-posttest">
+    @include('sweetalert::alert')
     <h3 class="card-title">
         HR Program - {{ $ujian->nama }}
     </h3>
@@ -124,6 +125,13 @@ Pre - Post Test
         @csrf
         <input type="hidden" name="ujian" value="{{ $ujian->id }}">
         <input type="hidden" name="start_date" value="{{ $start_date }}">
+        <div class="form-group _form-group">
+            <label for="trainer">
+                TRAINER <span style="color: red">*</span>
+            </label>
+            <input id="trainer" name="trainer" type="text" style="text-transform:capitalize;" class="form-control"
+                placeholder="Nama trainer.." required />
+        </div>
         @foreach ($soal_data as $data)
         <div class="content-task">
             <h3 class="sub-title">BAG : {{ strtoupper($data['nama']) }}</h3>
@@ -135,18 +143,18 @@ Pre - Post Test
                 <input type="hidden" name="soal[]" value="{{ $soal['soal']->id.'-'.$soal['soal']->jawaban_id }}">
                 <input type="hidden" name="soal_type[]" value="{{ $soal['soal']->type }}">
                 @if ($soal['soal']->type == 1)
-                    <div class="answer">
-                        <textarea name="jawaban[{{ $soal['soal']->id }}]" cols="5" rows="10" class="form-control"></textarea>
-                    </div>
+                <div class="answer">
+                    <textarea name="jawaban[{{ $soal['soal']->id }}]" cols="5" rows="10" class="form-control"
+                        style="padding: 20px"></textarea>
+                </div>
                 @else
-                    @foreach ($soal['jawaban'] as $jawaban)
-                    <div class="answer">
-                        <input type="radio" name="jawaban[{{ $jawaban->soal_id }}]"
-                            value="{{ $jawaban->id }}" required>
-                        <label for="{{ $jawaban->id }}">{{ $jawaban->jawaban }}</label>
-                        <br>
-                    </div>
-                    @endforeach
+                @foreach ($soal['jawaban'] as $jawaban)
+                <div class="answer">
+                    <input type="radio" name="jawaban[{{ $jawaban->soal_id }}]" value="{{ $jawaban->id }}" required>
+                    <label for="{{ $jawaban->id }}">{{ $jawaban->jawaban }}</label>
+                    <br>
+                </div>
+                @endforeach
                 @endif
             </div>
             @endforeach

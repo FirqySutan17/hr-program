@@ -122,6 +122,14 @@ Pre - Post Test
     <?php $jawaban_user = json_decode($ujian_user->json_jawaban); ?>
     @foreach ($soal_data as $data)
     <div class="content-task">
+        <div class="form-group _form-group" style="display: flex; width: 100%; margin-top: 20px">
+            <label for="trainer" style="width: 10%; padding-top: 10px">
+                TRAINER <span style="color: red">*</span>
+            </label>
+            <input id="trainer" name="trainer" type="text" value="{{ $ujian_user->trainer }}"
+                style="text-transform:capitalize; width: 90%" class="form-control" placeholder="Nama trainer.." required
+                readonly />
+        </div>
         <h3 class="sub-title">BAG : {{ strtoupper($data['nama']) }}</h3>
         @foreach ($data['data'] as $soal)
         <?php 
@@ -133,18 +141,19 @@ Pre - Post Test
                 {{ $loop->iteration }}. {{ $soal['soal']->soal }}
             </h5>
             @if ($soal['soal']->type == 1)
-                <div class="answer">
-                    <textarea cols="5" rows="10" class="form-control" readonly>{{ $jawab->jawaban_id }}</textarea>
-                </div>
+            <div class="answer">
+                <textarea cols="5" rows="10" class="form-control" style="padding: 20px"
+                    readonly>{{ $jawab->jawaban_id }}</textarea>
+            </div>
             @else
-                @foreach ($soal['jawaban'] as $jawaban)
-                <div class="answer">
-                    <input type="radio"
-                        value="{{ $jawaban->id }}" disabled {{ $jawaban->id == $jawab->jawaban_id ? 'checked' : '' }} >
-                    <label for="{{ $jawaban->id }}">{{ $jawaban->jawaban }}</label>
-                    <br>
-                </div>
-                @endforeach
+            @foreach ($soal['jawaban'] as $jawaban)
+            <div class="answer">
+                <input type="radio" value="{{ $jawaban->id }}" disabled {{ $jawaban->id == $jawab->jawaban_id ?
+                'checked' : '' }} >
+                <label for="{{ $jawaban->id }}">{{ $jawaban->jawaban }}</label>
+                <br>
+            </div>
+            @endforeach
             @endif
         </div>
         @endforeach

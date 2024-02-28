@@ -124,6 +124,13 @@ Pre - Post Test
         @csrf
         <input type="hidden" name="ujian" value="{{ $ujian->id }}">
         <input type="hidden" name="start_date" value="{{ $start_date }}">
+        <div class="form-group _form-group">
+            <label for="trainer">
+                TRAINER <span style="color: red">*</span>
+            </label>
+            <input id="trainer" name="trainer" type="text" style="text-transform:capitalize;" class="form-control"
+                placeholder="Nama trainer.." required />
+        </div>
         @foreach ($soal_data as $data)
         <div class="content-task">
             <h3 class="sub-title">BAG : {{ strtoupper($data['nama']) }}</h3>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DB;
 use File;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PrepostTestController extends Controller
 {
@@ -26,6 +27,7 @@ class PrepostTestController extends Controller
             $previous_test_id = $ujian->id - 1;
             $previous_ujian_user = DB::table('tb_ujian_user')->where('ujian_id', $previous_test_id)->where('employee_id', auth()->user()->employee_id)->first();
             if (empty($previous_ujian_user)) {
+                Alert::warning('Warning!', 'Harap menyelesaikan test sebelumnya!');
                 return redirect()->route('home');
             }
         }
@@ -75,6 +77,7 @@ class PrepostTestController extends Controller
     public function store(Request $request)
     {
         $ujian_id   = $request->ujian;
+        $trainer   = $request->trainer;
         $soal       = $request->soal;
         $soal_type       = $request->soal_type;
         $jawaban    = $request->jawaban;
@@ -102,6 +105,7 @@ class PrepostTestController extends Controller
         $json_jawaban_user = json_encode($jawaban_user);
         $save_ujian = [
             "ujian_id"      => $ujian_id,
+            "trainer"       => strtoUpper($trainer),
             "employee_id"   => auth()->user()->employee_id,
             "json_jawaban"  => $json_jawaban_user,
             "start_date"    => $request->start_date,
@@ -110,6 +114,7 @@ class PrepostTestController extends Controller
         ];
         
         $insert = DB::table('tb_ujian_user')->insert($save_ujian);
+        Alert::success('Tersimpan', 'Jawabanmu berhasil tersimpan!');
         return redirect()->back();
     }
 

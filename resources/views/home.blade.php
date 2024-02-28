@@ -189,6 +189,7 @@ Dashboard
 @section('content')
 <div class="main-content">
     <section class="nav-dash">
+        @include('sweetalert::alert')
         <center>
             <img src="{{ asset('img/logo.png') }}" style="width: 100%; object-fit: cover;z-index: 100">
         </center>
