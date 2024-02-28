@@ -206,9 +206,13 @@ Report
         border-bottom: 1px solid #f4f4f4;
     }
 
-    select.input-sm {
-        height: 30px;
-        line-height: 18px !important;
+    .b-style {
+        font-family: pjsBold;
+        font-size: 14px;
+        color: #0f172a;
+        margin-bottom: 0px;
+        background: transparent;
+        padding: 0px
     }
 </style>
 
