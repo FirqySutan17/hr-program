@@ -36,4 +36,5 @@ Route::group(['middleware' => ['auth']], function () {
 
     // REPORT
     Route::match(['get', 'post'], '/report', [App\Http\Controllers\ReportController::class, 'index'])->name('report.index');
+    Route::post('/report/export', [App\Http\Controllers\EvaluasiController::class, 'export'])->name('report.export');
 });
