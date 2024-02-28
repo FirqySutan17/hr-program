@@ -234,7 +234,7 @@ Report
                 <button type="submit" class="btn btn-primary btn-block" style="height: 40px">FILTER</button>
             </div>
             <div class="col-md-2 col-sm-6">
-                <button type="button" class="btn btn-primary btn-block"
+                <button type="submit" formaction="{{ route('report.export') }}" class="btn btn-primary btn-block"
                     style="height: 40px; background: green">EXPORT</button>
             </div>
         </div>
