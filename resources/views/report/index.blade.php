@@ -227,12 +227,14 @@ Report
         <div class="row"
             style="margin-top: 30px; border: 1px solid #000; border-right: 0px solid #000; border-left: 0px solid #000; padding: 20px 0px;">
             <div class="col-md-8 col-sm-12">
-                <select name="ujian" class="form-control" style="border-radius: 8px; height: 40px">
-                    @foreach ($ujian_data as $ujian)
-                    <option {{ $ujian->id == $ujian_id ? 'selected' : '' }} value="{{ $ujian->id }}">{{ $ujian->nama }}
-                    </option>
-                    @endforeach
-                </select>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <input type="date" name="end_date" value="{{ $filter['start_date'] }}" class="form-control" placeholder="Start Date">
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <input type="date" name="end_date" value="{{ $filter['end_date'] }}" class="form-control" placeholder="End Date">
+                    </div>
+                </div>
             </div>
             <div class="col-md-2 col-sm-6">
                 <button type="submit" class="btn btn-primary btn-block" style="height: 40px">FILTER</button>
@@ -247,22 +249,26 @@ Report
         <thead>
             <tr>
                 <th style="text-align: center;">No</th>
-                <th style="text-align: center;">NPK</th>
-                <th style="text-align: center;">Nama</th>
+                <th style="text-align: center;">Date</th>
                 <th style="text-align: center;">Plant</th>
                 <th style="text-align: center;">Dept</th>
-                <th style="text-align: center;">Point</th>
+                <th style="text-align: center;">NPK</th>
+                <th style="text-align: center;">Nama</th>
+                <th style="text-align: center;">Pre</th>
+                <th style="text-align: center;">Post</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($ujian_user as $uu)
             <tr>
                 <td style="text-align: center; vertical-align: middle">{{ $loop->iteration }}</td>
-                <td style="text-align: center; vertical-align: middle">{{ $uu->employee_id }}</td>
-                <td style="vertical-align: middle">{{ $uu->name }}</td>
+                <td style="text-align: center; vertical-align: middle">{{ $uu->start_date }}</td>
                 <td style="text-align: center; vertical-align: middle">{{ $uu->plant_name }}</td>
                 <td style="text-align: center; vertical-align: middle">{{ $uu->dept_name }}</td>
-                <td style="text-align: center; vertical-align: middle">{{ $uu->score }}</td>
+                <td style="text-align: center; vertical-align: middle">{{ $uu->employee_id }}</td>
+                <td style="text-align: center; vertical-align: middle">{{ $uu->name }}</td>
+                <td style="text-align: center; vertical-align: middle">{{ $uu->pre_score }}</td>
+                <td style="text-align: center; vertical-align: middle">{{ $uu->post_score }}</td>
             </tr>
             @endforeach
         </tbody>

@@ -16,22 +16,18 @@ class ReportController extends Controller
      */
     public function index(Request $request)
     {
-        $ujian_id = 1;
+        $start_date = date('Y-m-d');
+        $end_date   = date('Y-m-d');
         if (!empty($request->all())) {
-            $ujian_id = $request->ujian;
+            $start_date = date('Y-m-d', strtotime($request->start_date));
+            $end_date = date('Y-m-d', strtotime($request->end_date));
         }
-        $ujian_user = DB::table('tb_ujian_user')
-            ->select('tb_ujian_user.*', 'users.name', 'm_department.full_dept_name as dept_name', 'm_plant.class3 as plant_name')
-            ->join('users', 'users.employee_id', 'tb_ujian_user.employee_id')
-            ->join('m_department', function($join)
-            {
-                $join->on('users.company', '=', 'm_department.company');
-                $join->on('users.plant', '=', 'm_department.plant');
-                $join->on('users.department', '=', 'm_department.dept');
-            })->join('m_plant', 'users.plant', '=', 'm_plant.code')
-            ->where('tb_ujian_user.ujian_id', $ujian_id)->orderBy('tb_ujian_user.id', 'DESC')->get();
-        $ujian_data = DB::table('tb_ujian')->orderBy('id', 'ASC')->get();
-        return view('report.index', compact('ujian_data', 'ujian_user', 'ujian_id'));
+        $filter = [
+            'start_date'    => $start_date,
+            'end_date'      => $end_date
+        ];
+        $ujian_user = $this->report_query($start_date, $end_date);
+        return view('report.index', compact('ujian_user', 'filter'));
     }
 
     public function export(Request $request)
@@ -42,7 +38,6 @@ class ReportController extends Controller
             ->join('users', 'users.employee_id', 'tb_ujian_user.employee_id')
             ->join('m_department', function($join)
             {
-                $join->on('users.company', '=', 'm_department.company');
                 $join->on('users.plant', '=', 'm_department.plant');
                 $join->on('users.department', '=', 'm_department.dept');
             })->join('m_plant', 'users.plant', '=', 'm_plant.code')
@@ -65,6 +60,33 @@ class ReportController extends Controller
                 "jawaban"   => $jawaban_soal
             ];
         }
+    }
+
+    private function report_query($start_date, $end_date) {
+        $start_date = $start_date." 00:00:00";
+        $end_date   = $end_date." 23:59:59";
+        $query = DB::table('users as a')
+            ->select(
+                'a.employee_id', 'a.name', 'b.class3 as plant_name', 'c.full_dept_name as dept_name', 
+                'pre.trainer', 'pre.start_date', 'pre.score as pre_score', DB::raw('IFNULL(post.score, 0) as post_score')
+            )
+            ->join('m_plant as b', 'a.plant', 'b.code')
+            ->join('m_department as c', function($join) {
+                $join->on('a.plant', 'c.plant');
+                $join->on('a.department', 'c.dept');
+            })
+            ->join('tb_ujian_user as pre', function($join) {
+                $join->on('a.employee_id', 'pre.employee_id');
+                $join->on('pre.ujian_id', DB::raw("'1'"));
+            })
+            ->leftJoin('tb_ujian_user as post', function($join) {
+                $join->on('a.employee_id', 'post.employee_id');
+                $join->on('post.ujian_id', DB::raw("'2'"));
+            })
+            ->whereBetween('pre.start_date', [$start_date, $end_date])
+            ->orderBy('pre.start_date', 'DESC')->get();
+        
+        return $query;
     }
 
     /**
