@@ -229,7 +229,7 @@ Report
             <div class="col-md-8 col-sm-12">
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
-                        <input type="date" name="end_date" value="{{ $filter['start_date'] }}" class="form-control" placeholder="Start Date">
+                        <input type="date" name="start_date" value="{{ $filter['start_date'] }}" class="form-control" placeholder="Start Date">
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <input type="date" name="end_date" value="{{ $filter['end_date'] }}" class="form-control" placeholder="End Date">
