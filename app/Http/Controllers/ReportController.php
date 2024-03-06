@@ -6,6 +6,7 @@ use App\Models\Report;
 use Illuminate\Http\Request;
 use DB;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ReportExport;
 
 class ReportController extends Controller
 {
@@ -32,37 +33,29 @@ class ReportController extends Controller
 
     public function export(Request $request)
     {
-        $ujian_id = $request->ujian;
-        $ujian_user = DB::table('tb_ujian_user')
-            ->select('tb_ujian_user.*', 'users.name', 'm_department.full_dept_name as dept_name', 'm_plant.class3 as plant_name')
-            ->join('users', 'users.employee_id', 'tb_ujian_user.employee_id')
-            ->join('m_department', function($join)
-            {
-                $join->on('users.plant', '=', 'm_department.plant');
-                $join->on('users.department', '=', 'm_department.dept');
-            })->join('m_plant', 'users.plant', '=', 'm_plant.code')
-            ->where('tb_ujian_user.ujian_id', $ujian_id)->orderBy('tb_ujian_user.id', 'DESC')->get();
-        
-        $soal   = DB::table('tb_soal')->select('tb_soal.*', 'tb_bagian.nama as nama_bagian')->join('tb_bagian', 'tb_bagian.id', 'tb_soal.bagian_id')->join('tb_ujian_bagian', 'tb_ujian_bagian.bagian_id', 'tb_bagian.id')->where('tb_ujian_bagian.ujian_id', $ujian->id)->orderBy('tb_bagian.id', 'ASC')->orderBy('tb_soal.id', 'ASC')->get();
-        $jawaban   = DB::table('tb_jawaban')->orderBy('soal_id', 'ASC')->get();
-        dd($soal, $jawaban);
-        $soal_data = [];
-        foreach ($soal as $s) {
-            if (!array_key_exists($s->bagian_id, $soal_data)) {
-                $soal_data[$s->bagian_id] = [
-                    "nama"  => $s->nama_bagian,
-                    "data"  => []
-                ];
-            }
-            $jawaban_soal = $jawaban->where('soal_id', $s->id);
-            $soal_data[$s->bagian_id]["data"][] = [
-                "soal"      => $s,
-                "jawaban"   => $jawaban_soal
-            ];
+        $start_date = date('Y-m-d', strtotime($request->start_date));
+        $end_date = date('Y-m-d', strtotime($request->end_date));
+        $ujian_user = $this->report_query($start_date, $end_date);
+
+        $evaluasi_user = DB::table('tb_ujian_user')->where('ujian_id', 3)->get();
+        $soal   = DB::table('tb_soal')->select('tb_soal.*')->where('bagian_id', 4)->get();
+        $header = ["DATE", "PLANT", "DEPT", "NPK", "NAMA", "TRAINER", "PRE TEST", "POST TEST"];
+        $data = [
+            "main_data"         => [],
+            "evaluasi_data"     => []
+        ];
+
+        $data["main_data"]["HEADER"] = $header;
+        foreach ($ujian_user as $uu) {
+            $uu_data = [$uu->start_date, $uu->plant_name, $uu->dept_name, $uu->employee_id, $uu->name, $uu->trainer, $uu->pre_score, $uu->post_score];
+            $data["main_data"][$uu->employee_id] = $uu_data;
         }
+
+        $nama_file = 'report_excel_'.date('Y-m-d_H-i-s').'.xlsx';
+        return Excel::download(new ReportExport($data), $nama_file);
     }
 
-    private function report_query($start_date, $end_date) {
+    public function report_query($start_date, $end_date) {
         $start_date = $start_date." 00:00:00";
         $end_date   = $end_date." 23:59:59";
         $query = DB::table('users as a')
