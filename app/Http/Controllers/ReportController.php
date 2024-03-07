@@ -50,7 +50,21 @@ class ReportController extends Controller
             $uu_data = [$uu->start_date, $uu->plant_name, $uu->dept_name, $uu->employee_id, $uu->name, $uu->trainer, $uu->pre_score, $uu->post_score];
             $data["main_data"][$uu->employee_id] = $uu_data;
         }
+        
+        if (!empty($soal)) {
+            foreach ($soal as $eval) {
+                $data["evaluasi_data"]["HEADER"][] = $eval->soal;
+            }
+        }
 
+        if (!empty($evaluasi_user)) {
+            foreach ($evaluasi_user as $eval_user) {
+                $json_jawaban = json_decode($eval_user->json_jawaban);
+                foreach ($json_jawaban as $jawaban) {
+                    $data["evaluasi_data"][$eval_user->employee_id][] = $jawaban->jawaban_id;
+                }
+            }
+        }
         $nama_file = 'report_excel_'.date('Y-m-d_H-i-s').'.xlsx';
         return Excel::download(new ReportExport($data), $nama_file);
     }
