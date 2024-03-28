@@ -117,7 +117,7 @@
             </li>
 
 
-            <?php $employee_ids = ['01220014', '01220023', '01210018', '01080019', '01970045', '01110024']; ?>
+            <?php $employee_ids = ['01220014', '01220023', '01210018', '01080019', '01970045', '01110024', '01210027']; ?>
             @if (in_array(auth()->user()->employee_id, $employee_ids))
             <li class="{{routeActive('report.index')}}">
                 <a href="{{ route('report.index') }}">
