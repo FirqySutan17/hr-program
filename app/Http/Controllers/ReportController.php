@@ -17,6 +17,7 @@ class ReportController extends Controller
      */
     public function index(Request $request)
     {
+        $this->checkAuth();
         $start_date = date('Y-m-d');
         $end_date   = date('Y-m-d');
         if (!empty($request->all())) {
@@ -91,9 +92,12 @@ class ReportController extends Controller
                 $join->on('post.ujian_id', DB::raw("'2'"));
             })
             ->whereBetween('pre.start_date', [$start_date, $end_date])
-            ->orderBy('pre.start_date', 'DESC')->get();
-        
-        return $query;
+            ->orderBy('pre.start_date', 'DESC');
+        if (auth()->user()->plant != '0112') {
+            $query->where('a.plant', auth()->user()->plant);
+        }
+        $result = $query->get();
+        return $result;
     }
 
     /**
@@ -160,5 +164,24 @@ class ReportController extends Controller
     public function destroy(Report $report)
     {
         //
+    }
+
+    public function checkAuth()
+    {
+        $employee_ids = [
+            '01220014', '01220023', '01210018', '01080019', '01970045', '01110024', '01210027', '01050008', // JAKARTA
+            '01180055', '02070146', // SERANG
+            '02070146', '02110238', // JOMBANG
+            '04220017', '04170001', // LAMPUNG
+            '05220394', '05220022', // SEMARANG
+            '06220001', '06220003', // KALIMANTAN
+            '03141112', '03130434', // MEDAN
+            '07160006', '07140027', // SUJA
+        ];
+
+        if (!in_array(auth()->user()->employee_id, $employee_ids)) {
+            Alert::warning('Warning!', 'Anda tidak memiliki akses ke halaman ini!');
+            return redirect()->route('home');
+        }
     }
 }
